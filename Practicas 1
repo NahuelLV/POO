@@ -1,0 +1,55 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    int ej = atoi(argv[1]);
+    int a = atoi(argv[2]);
+    int b = atoi(argv[3]);
+    int c = atoi(argv[4]);
+
+    switch(ej){
+        case 1:
+        if(a == 0){
+            printf("El numero es 0");
+        }else if(a > 0){
+            printf("El numero es positivo");
+        }else printf("El numero es negativo");
+        break;
+
+        case 2:
+        if(a%2 == 0){
+            printf("El numero es par");
+        }else printf("El numero es impar");
+        break;
+
+        case 3: 
+        if(a%2 == 0 && a%3 == 0){
+            printf("El numero es multiplo de 2 y 3");
+        }else if(a%2 == 0){
+            printf("El numero es multiplo de 2");
+        }else if(a%3 == 0){
+            printf("El numero es multiplo de 3");
+        }else printf("El numero no es multiplo de 2 ni de 3");
+        break;
+        
+        case 4:
+        if(a == b && a == c){
+         printf("Los numeros son iguales");
+        }else  if(a > b){
+            if(a > c){
+         printf("El mayor es A");
+            }else if(a == c){
+                printf("Los mayores son A y C");
+            }
+            }else  if(c == b){
+         printf("Son los mayores es C y B");
+        }else if(c > b){
+         printf("El mayor es C");
+        }else  if(a == b){
+         printf("Son los mayores es A y B");
+        }else printf("El mayor es B");
+        
+
+    }
+    return 0;
+}
