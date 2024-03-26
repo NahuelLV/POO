@@ -1,0 +1,27 @@
+ #include <stdio.h>
+  #include <stdlib.h>
+ 
+ int main (void) {
+     int alumnos;
+    printf("ingrese una cantidad de alumnos: ");
+    scanf("%d", &alumnos);
+    int precioviaje;
+    if (alumnos >= 100){
+        precioviaje = alumnos * 500;
+        printf ("el precio del viajes por %d alumnos, es de %d ", alumnos , precioviaje);
+    }
+     else if (alumnos <= 99 && alumnos >=50){
+        precioviaje = alumnos * 400;
+        printf ("el precio del viajes por %d alumnos, es de %d ", alumnos, precioviaje);
+    }
+     else if (alumnos <=49 && alumnos >=30){
+        precioviaje = alumnos * 300;
+            printf ("el precio del viajes por %d alumnos,es de %d ", alumnos, precioviaje);
+     }
+    else if (alumnos < 30){
+        precioviaje = 6000;
+            printf ("el precio del viajes por %d alumnos, es de %d ", alumnos, precioviaje);
+    }
+    return 0;
+ }
+ 
