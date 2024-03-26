@@ -1,27 +1,69 @@
- #include <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+/* El director de una escuela está organizando un viaje de estudios, y requiere determinar cuánto debe cobrar a cada alumno 
+y cuánto debe pagar a la compañía de viajes por el servicio. La forma de cobrar es la siguiente: 
+Si son 100 alumnos o más, el costo por cada alumno es de $ 500, de 50 a 99 alumnos, el costo es de $ 400  y  de 30 a 49, 
+de $ 300. Pero si son menos de 30, el costo del alquiler del micro es de $ 6000.- sin importar el número de alumnos. 
+ */
+  #include <stdio.h>
   #include <stdlib.h>
+
  
  int main (void) {
+    int ejercicio;
+    printf("ingrese que ejercicio quiere: ");
+    scanf("%d", &ejercicio);
+    switch (ejercicio){
+        case 1:
      int alumnos;
     printf("ingrese una cantidad de alumnos: ");
     scanf("%d", &alumnos);
-    int precioviaje;
+    double precioviaje = 0;
+    double precioalum;
+
     if (alumnos >= 100){
-        precioviaje = alumnos * 500;
-        printf ("el precio del viajes por %d alumnos, es de %d ", alumnos , precioviaje);
+        precioviaje = alumnos * 500.0;
+        printf ("el precio del viajes por %d alumnos, es de %1.f ", alumnos , precioviaje);
     }
      else if (alumnos <= 99 && alumnos >=50){
-        precioviaje = alumnos * 400;
-        printf ("el precio del viajes por %d alumnos, es de %d ", alumnos, precioviaje);
+        precioviaje = alumnos * 400.0; 
+        printf ("el precio del viajes por %d alumnos, es de %1.f ", alumnos, precioviaje);
     }
      else if (alumnos <=49 && alumnos >=30){
-        precioviaje = alumnos * 300;
-            printf ("el precio del viajes por %d alumnos,es de %d ", alumnos, precioviaje);
+        precioviaje = alumnos * 300.0;
+            printf ("el precio del viajes por %d alumnos,es de %1.f ", alumnos, precioviaje);
      }
     else if (alumnos < 30){
-        precioviaje = 6000;
-            printf ("el precio del viajes por %d alumnos, es de %d ", alumnos, precioviaje);
+        precioviaje = 6000.0;
+            printf ("el precio del viajes por %d alumnos, es de %1.f ", alumnos, precioviaje);
+            precioalum = precioviaje / alumnos;
+            printf("\n");
+            printf ("Cada alumo paga aprox: %2.f ", precioalum);
     }
-    return 0;
+    break;
+
+    case 2:
+    float sueldo;
+    float total;
+    float comision;
+    float venta1;
+    float venta2;
+    float venta3;
+    printf("ingrese el sueldo base: ");
+    scanf("%f" , &sueldo);
+    printf("\ningrese la venta: ");
+    scanf("%f", &venta1);
+printf("\ningrese la venta: ");
+    scanf("%f", &venta2);
+    printf("\ningrese la venta: ");
+    scanf("%f", &venta3);
+
+comision = (venta1+venta2+venta3) *10.0;
+
+
+    }
+        return 0;
  }
+ 
  
