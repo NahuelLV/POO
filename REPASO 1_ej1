@@ -47,20 +47,19 @@ de $ 300. Pero si son menos de 30, el costo del alquiler del micro es de $ 6000.
     float sueldo;
     float total;
     float comision;
-    float venta1;
-    float venta2;
-    float venta3;
+    float venta;
+    float acumulador;
     printf("ingrese el sueldo base: ");
     scanf("%f" , &sueldo);
-    printf("\ningrese la venta: ");
-    scanf("%f", &venta1);
-printf("\ningrese la venta: ");
-    scanf("%f", &venta2);
-    printf("\ningrese la venta: ");
-    scanf("%f", &venta3);
-
-comision = (venta1+venta2+venta3) *10.0;
-
+    for(int i = 0; i < 3; i++){
+        printf("Ingrese sus ventas:");
+        scanf("%f" , &venta);
+        acumulador= acumulador + venta;
+    }
+    comision= acumulador * 0.10;
+     printf("Sus comisiones son de: %2.f", comision);
+     total= comision + sueldo;
+     printf("\nSu sueldo total es de: %2.f", total);
 
     }
         return 0;
