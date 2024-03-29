@@ -55,19 +55,58 @@
     break;
 
     case 3:
-    float trabajoF;
-    float examenF;
-    float notas;
-    float parcial;
-    float T;    
-    float notaF;
-    for(int i = 0; i < 3; i++){
-        printf("Ingrese sus notas:");
-        scanf("%f" , &notas);
-        T= T + notas;
+    float notas_parciales[3];
+    float notas_examen_final;
+    float notas_trabajo_final;
+    float notas_final;
+
+    printf("Ingrese las calificaciones de los tres parciales:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Parcial %d: ", i + 1);
+        scanf("%f", &notas_parciales[i]);
     }
-    parcial= T*55;
+    printf("Ingrese la calificación del examen final: ");
+    scanf("%f", &notas_examen_final);
+    printf("Ingrese la calificación del trabajo final: ");
+    scanf("%f", &notas_trabajo_final);
+
+    float promedio_parciales = 0;
+    for (int i = 0; i < 3; i++) {
+        promedio_parciales += notas_parciales[i];
+    }
+    promedio_parciales /= 3;
+
+    notas_final = promedio_parciales * 0.55 + notas_examen_final * 0.30 + notas_trabajo_final * 0.15;
+
+    printf("La calificación final del alumno es: %.2f\n", notas_final);
+    break;
     
+    case 4:
+    int num1, num2;
+    printf("Ingrese el primer número: ");
+    scanf("%d", &num1);
+    printf("Ingrese el segundo número: ");
+    scanf("%d", &num2);
+    printf("Números pares entre %d y %d:\n", num1, num2);
+    for (int i = num1; i <= num2; i++) {
+        if (i % 2 == 0) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+    break;
+    
+    case 5: 
+    float distancia_coche1 = 70.0;
+    float distancia_coche2 = 150.0;
+    float velocidad;
+    printf("Ingrese la velocidad: ");
+    scanf("%f", &velocidad);
+    int tiempo = (distancia_coche2 - distancia_coche1) / velocidad;
+
+    float posicion_encuentro = distancia_coche1 + (velocidad * tiempo);
+    printf("Los coches se encontrarán en el kilómetro %.2f.\n", posicion_encuentro);
+    break;
     }
         return 0;
  }
