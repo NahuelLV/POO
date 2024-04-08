@@ -30,8 +30,45 @@ int main (void) {
         
         case 3:
         int pos;
-        printf("Ingrese el valor: ")
-        scanf("%f", &pos);
+        printf("Ingrese el valor: ");
+        scanf("%d", &pos);
+        if(pos > 0){
+        if(pos%2 == 0){
+            printf("El numero es par");
+        }else printf("El numero es impar");
+        }else printf("El numero es negativo, ingrese otro");
+        break;
         
+        case 4:
+        float val1, val2, val3, val4, tp;
+        printf("Ingrese las notas: ");
+        printf("\n Nota 1:");
+        scanf("%f", &val1);
+        printf("Nota 2:");
+        scanf("%f", &val2);
+        printf("Nota 3:");
+        scanf("%f", &val3);
+        printf("Nota 4:");
+        scanf("%f", &val4);
+        printf("Nota TP:");
+        scanf("%f", &tp);
+        double final= (val1+val2+val3+val4+tp) / 5.00;
+        printf("La nota final es: %.2f ", final);
+        break;
+        
+        case 5:
+        float nt;
+        printf("Ingrese su nota: ");
+        scanf("%f", &nt);
+        if(nt >= 6.0 && nt < 8.0){
+            printf("Esta aprobado");
+        }else if(nt >= 8.0){
+            printf("Felicidades buena nota");
+        }else if(nt <= 5.0 && nt > 1.0){
+            printf("Esta desaprobado");
+        }else if(nt <= 1.0){
+            printf("Debe esforzarse mas");
+        }
+        break;
         }
     }
