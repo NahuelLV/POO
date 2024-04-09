@@ -96,6 +96,30 @@ int main (void) {
         }
         break;
         
-        
+        case 7:
+        int hs;
+        int min;
+        printf("Ingrese hora: ");
+        scanf("%d", &hs);
+        printf("Ingrese minutos: ");
+        scanf("%d", &min);
+        if(hs < 12){
+            printf  ("Son las %d:%d am", hs, min);
+        }else if(hs == 12){
+               printf  ("Son las %d:%d pm", hs, min);  
+            }else if(hs > 12){
+            int hsN = hs - 12;
+            printf  ("Son las %d:%d pm", hsN, min);
+            }
+            break;
+            
+            case 8:
+            float capital;
+            float total;
+            printf("Ingrese su dinero: ");
+            scanf("%f", &capital);
+            total = capital * 1.02;
+            printf("Su dinero despues de un mes es:%.2f", total);
         }
-    }
+        }
+    
