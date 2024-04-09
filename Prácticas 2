@@ -70,5 +70,32 @@ int main (void) {
             printf("Debe esforzarse mas");
         }
         break;
+        
+        case 6:
+        int sueldo;
+        printf("Ingrese su sueldo: ");
+        scanf("%d", &sueldo);
+        float alquiler;
+        printf("Ingrese su alquiler: ");
+        scanf("%f", &alquiler);
+        double alquilerT;
+        if(sueldo <= 202){
+            printf("Su alquiler final es de:%.2f\n", alquiler);
+        }else if(sueldo > 202 && sueldo <= 607){
+            alquilerT= alquiler * 1.05;
+            printf("Su alquiler final es de:%.2f\n", alquilerT);
+            }else if(sueldo > 607 && sueldo <= 1013){
+            alquilerT= alquiler * 1.10;
+            printf("Su alquiler final es de:%.2f\n", alquilerT);
+        }else if(sueldo > 1013 && sueldo <= 1418){
+            alquilerT= alquiler * 1.15;
+            printf("Su alquiler final es de:%.2f\n", alquilerT);
+        }else if(sueldo > 1418){
+            alquilerT= alquiler * 1.25;
+            printf("Su alquiler final es de:%.2f\n", alquilerT);
+        }
+        break;
+        
+        
         }
     }
