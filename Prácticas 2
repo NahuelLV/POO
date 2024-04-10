@@ -120,6 +120,20 @@ int main (void) {
             scanf("%f", &capital);
             total = capital * 1.02;
             printf("Su dinero despues de un mes es:%.2f", total);
+            break;
+            
+            case 9: 
+            int edadP = 50;
+            int edadH = 20;
+            for(int i = edadH; i < edadP; i++){
+                edadP+=1;
+                if(i == edadP / 2){
+                printf("El hijo tendra %d años y el padre tendra %d años, dentro de %d\n", i, edadP-1, i - edadH);
+                 break;
+                }
+            }
+                break;
+            
         }
         }
     
