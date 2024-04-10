@@ -1,1 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+int main (void) {
+    int ejercicio;
+    printf("ingrese que ejercicio quiere: ");
+    scanf("%d", &ejercicio);
+    switch (ejercicio){
+        case 1:
+        int h, m, s;
+        int st;
+        printf("Ingrese los segundos: ");
+        scanf("%d", &st);
+        h = st / 3600;
+        st -= 3600 * h;
+        m = st / 60;
+        st -= 60 * m;
+        s = st;
+        printf("Su horario es %d:%d:%d", h, m, s);
+        break;
+        
+        case 2:
+        float notas_parciales[3];
+        float notas_examen_final;
+        float notas_trabajo_final;
+        float notas_final;
+
+        printf("Ingrese las calificaciones de los tres parciales:\n");
+        for (int i = 0; i < 3; i++) {
+        printf("Parcial %d: ", i + 1);
+        scanf("%f", &notas_parciales[i]);
+        }
+        printf("Ingrese la calificación del examen final: ");
+        scanf("%f", &notas_examen_final);
+        printf("Ingrese la calificación del trabajo final: ");
+        scanf("%f", &notas_trabajo_final);
+
+        float promedio_parciales = 0;
+        for (int i = 0; i < 3; i++) {
+        promedio_parciales += notas_parciales[i];
+        }
+        promedio_parciales /= 3;
+
+     notas_final = promedio_parciales * 0.55 + notas_examen_final * 0.30 + notas_trabajo_final * 0.15;
+
+        printf("La calificación final del alumno es: %.2f\n", notas_final);
+        break;
+
+        case 3:
+        float sueldo;
+        float total;
+        float comision;
+        float venta;
+        float acumulador;
+        printf("ingrese el sueldo base: ");
+        scanf("%f" , &sueldo);
+        for(int i = 0; i < 3; i++){
+        printf("Ingrese sus ventas:");
+        scanf("%f" , &venta);
+        acumulador = venta + acumulador;
+         //printf("Su comisione es de: %.2f", acumulador);
+        }
+        comision = acumulador * 0.10;
+         printf("Sus comisiones son de: %.2f", comision);
+         total= comision + sueldo;
+        printf("\nSu sueldo total es de: %.2f", total);
+        break;
+        
+        case 4:
+        float pago;
+        printf("ingrese el total del pago: ");
+        scanf("%f" , &pago);
+        float ac = pago * 0.15;
+        float pagoT = pago - ac;
+    printf("su total del pago con el descuesto es: %.2f", pagoT);
+        break;
+        
+        case 5:
+        int num;
+        printf("ingrese su numero: ");
+        scanf("%d" , &num);
+        if(num > 0){
+            printf("El valor absoluto de su numero es:%d", num);
+        }else if(num < 0){
+           num *= (-1);
+            printf("El valor absoluto de su numero es:%d", num);
+        }
+        break;
+        }
+        }
+    
