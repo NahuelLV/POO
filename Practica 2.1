@@ -86,6 +86,51 @@ int main (void) {
             printf("El valor absoluto de su numero es:%d", num);
         }
         break;
+        
+        case 6:
+        int alumnos;
+        int alumnas;
+        printf("ingrese los alumnos del curso: ");
+        scanf("%d" , &alumnos);
+        printf("ingrese las alumnas del curso: ");
+        scanf("%d" , &alumnas);
+        int alumnosTotales = alumnos + alumnas;
+        printf("El total de alumnos es: %d\n", alumnosTotales);
+        float porcentajeMujeres = (100.0 * alumnas) / alumnosTotales;
+        printf("El porcentaje de mujeres en el curso es de: %.2f\n", porcentajeMujeres);
+        float porcentajeHombres = 100.0 - porcentajeMujeres;
+        printf("El porcentaje de mujeres en el curso es de: %.2f", porcentajeHombres);
+        break;
+        
+        case 7:
+        float pesos;
+        printf("ingrese su total de pesos: ");
+        scanf("%f" , &pesos);
+        float conversion;
+        printf("ingrese la conversion actual: ");
+        scanf("%f" , &conversion);
+        float dolares = pesos / conversion;
+        printf("Su total luego de la conversion es de: %.2f", dolares);
+        break;
+        
+        case 8:
+        float edad;
+        printf("ingrese su edad: ");
+        scanf("%f" , &edad);
+        float peso;
+        printf("ingrese su peso: ");
+        scanf("%f" , &peso);
+        char generos;
+        printf("Ingrese su genero(M o F):");
+        scanf("%s", &generos);
+        if(generos=='F'){
+            float FFCmax = ((210.0 - (edad*0.5)) - peso*0.01);
+            printf("Su Frecuencia cardíaca máxima tendria que ser de: %.2f", FFCmax);
+        }else if(generos='M'){
+            float MFCmax = ((210.0 - (edad * 0.5)) - peso*0.01) + 4.0;
+             printf("Su Frecuencia cardíaca máxima tendria que ser de: %.2f", MFCmax);
+        }
+        break;
         }
         }
     
