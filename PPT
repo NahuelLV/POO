@@ -5,7 +5,7 @@
 #include <string.h>
 
 int main(){
-    srand(time(NULL));
+    srand(time(NULL));  //Declaramos las variables basicas para el juego
     char *posibilidades[3] = {"piedra","papel","tijeras"};
     int jugada;
     int jugada_maquina;
@@ -13,13 +13,13 @@ int main(){
     printf("Bienvenido al juego!!\n");
     printf("Reglas: 0 = piedra - 1 = papel - 2 = tijeras\n");
     
-    int resultado = 0;
+    int resultado = 0;      //Declaramos las variables necesarias
     int resultado_vueltaM = 0;
     int resultado_rondaM = 0;
     int resultado_vueltaU = 0;
     int resultado_rondaU = 0;
  
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < 5; i++){  //Se pide ingresar la jugada del usuario
        for(int j = 0; j < 3; j++) {
         printf("Ingrese su jugada:");
         scanf("%d", &jugada);
@@ -27,15 +27,15 @@ int main(){
      printf("La máquina elige: %s\n", posibilidades[jugada_maquina]);
      
     if (jugada == jugada_maquina) {
-        resultado = 0; // Empate
+        resultado = 0; // Calculamos si es empate
     } else if ((strcmp(posibilidades[jugada], "piedra") == 0 && strcmp(posibilidades[jugada_maquina], "tijeras") == 0) ||
                (strcmp(posibilidades[jugada], "tijeras") == 0 && strcmp(posibilidades[jugada_maquina], "papel") == 0) ||
                (strcmp(posibilidades[jugada], "papel") == 0 && strcmp(posibilidades[jugada_maquina], "piedra") == 0)) {
-        resultado = 1; // Gana el usuario
+        resultado = 1; //Calculamos si es gana el usuario
     } else {
-        resultado = -1; // Gana la máquina
+        resultado = -1; // Calculamos si es gana la maquina
     }
-    if (resultado == 0) {
+    if (resultado == 0) {       //Se muestran el resultado de la vuelta
         printf("¡Empate!\n");
     } else if (resultado == 1) {
         printf("¡Ganaste!\n");
@@ -46,7 +46,7 @@ int main(){
     }
     
     
-    if(resultado_vueltaM == 2){
+    if(resultado_vueltaM == 2){ //Se muestra como va la partida
         resultado_rondaM += 1;
         printf("El resultado va: maquina %d - usuario %d\n", resultado_rondaM, resultado_rondaU);
         resultado_vueltaM = 0;
@@ -58,7 +58,7 @@ int main(){
        resultado_vueltaU = 0;
     }
     
-    if(resultado_rondaM == 3){
+    if(resultado_rondaM == 3){  //Se muestra el ganador de la partida
         printf("El resultado quedo: maquina %d - usuario %d\n", resultado_rondaM, resultado_rondaU);
          printf("GANO la Maquina!!");
     }else if(resultado_rondaU == 3){
