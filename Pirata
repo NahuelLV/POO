@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <string.h>
+
+void dibujarTablero(){
+    
+}
+
+
+
+void inicializarTablero(){
+    
+}
+
+
+
+int main(){
+    srand(time(NULL));  
+    int n;
+    printf("Ingrese el tamaño del tablero:")
+    scanf("%d", &n);
+    return 0;
+}
+ 
