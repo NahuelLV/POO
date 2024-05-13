@@ -4,23 +4,30 @@
 #include <math.h>
 #include <string.h>
 
-void dibujarTablero(){
-    
-}
-
-
 
 void inicializarTablero(){
     
 }
 
 
+void dibujarTablero(int arr[][0], int n){
+    for(int i = 0; i < n; i++){
+     for(int j = 0; j < n; j++){
+       arr[i][j] = 0;
+       printf("%d", arr[i][j]);
+    }
+     printf("\n");
+    }
+}
+
 
 int main(){
     srand(time(NULL));  
     int n;
-    printf("Ingrese el tamaño del tablero:")
+    printf("Ingrese el tamaño del tablero:");
     scanf("%d", &n);
+    int arr[0][0];
+    dibujarTablero(arr, n);
     return 0;
 }
  
