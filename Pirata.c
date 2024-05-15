@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-void inicializarTablero(int arr[][100], int n) {
+void inicializarTablero(int arr[][100], int n, int pirataX, int pirataY, int tesoroX, int tesoroY) {
     for (int i = 0; i < n; i++) {
         arr[0][i] = -1;         // Fila superior
         arr[n - 1][i] = -1;     // Fila inferior
@@ -11,11 +11,11 @@ void inicializarTablero(int arr[][100], int n) {
         arr[n-1][0] = 3;        // Esquina inferior izquierda
         arr[n-n][n-1] = 3;      // Esquina superior derecha
     }
-    int pirataX = rand() % (n-2)+1;
-    int pirataY = rand() % (n-2)+1;
+    pirataX = rand() % (n-2)+1;
+   pirataY = rand() % (n-2)+1;
     
-    int tesoroX = rand() % (n-2)+1;
-    int tesoroY = rand() % (n-2)+1;
+   tesoroX = rand() % (n-2)+1;
+   tesoroY = rand() % (n-2)+1;
     
     
     while(arr[pirataX][pirataY] == arr[tesoroX][tesoroY]){
@@ -43,6 +43,10 @@ void dibujarTablero(int arr[][100], int n) {
 int main() {
     int n;
     char opcion;
+    int pirataX;
+    int pirataY;
+    int tesoroX;
+    int tesoroY;
     srand(time(NULL));  
     printf("Hola, Bienvenido al juego del pirata!,\n Tu objetivo es encontrar el tesoro, quiere empezar?,y/n:");
     scanf("%s", &opcion);
@@ -52,11 +56,11 @@ int main() {
     int arr[100][100]; 
 
     // Inicializar y dibujar el tablero
-    inicializarTablero(arr, n);
+    inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
     dibujarTablero(arr, n);
     }
    else if(opcion == 'N' || opcion == 'n'){
-    printf("Bueno, andate a cagar");
+    printf("Bueno, que tenga un buen dia");
     return 0;
    }
    
