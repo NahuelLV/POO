@@ -11,10 +11,20 @@ void inicializarTablero(int arr[][100], int n) {
         arr[n-1][0] = 3;        // Esquina inferior izquierda
         arr[n-n][n-1] = 3;      // Esquina superior derecha
     }
-    int pirataX = rand() % n;
-    int pirataY = rand() % n; 
-    arr[pirataX][pirataY] = 2;
-        
+    int pirataX = rand() % (n-2)+1;
+    int pirataY = rand() % (n-2)+1;
+    
+    int tesoroX = rand() % (n-2)+1;
+    int tesoroY = rand() % (n-2)+1;
+    
+    
+    
+    while(arr[pirataX][pirataY] == arr[tesoroX][tesoroY]){
+     tesoroX = rand() % (n-2)+1;
+     tesoroY = rand() % (n-2)+1;
+    }
+arr[pirataX][pirataY] = 2;
+arr[tesoroX][tesoroY] = 5;    
 }
 
 
@@ -34,7 +44,7 @@ int main() {
     int n;
     char opcion;
     srand(time(NULL));  
-    printf("Hola, Bienvenido al juego del pirata!,\n Tu objetivo es encontrar el tesoro, quiere empezar?, y/n:");
+    printf("Hola, Bienvenido al juego del pirata!,\n Tu objetivo es encontrar el tesoro, quiere empezar?,y/n:");
     scanf("%s", &opcion);
     if(opcion == 'Y' || opcion == 'y'){
         printf("Ingrese el tamaño del tablero, este va a determinar tamaño del mapa de juego(Max = 100): ");
