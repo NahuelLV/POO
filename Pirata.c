@@ -18,10 +18,10 @@ void inicializarTablero(int arr[][100], int n) {
     int tesoroY = rand() % (n-2)+1;
     
     
-    
     while(arr[pirataX][pirataY] == arr[tesoroX][tesoroY]){
      tesoroX = rand() % (n-2)+1;
      tesoroY = rand() % (n-2)+1;
+     break;
     }
 arr[pirataX][pirataY] = 2;
 arr[tesoroX][tesoroY] = 5;    
