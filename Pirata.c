@@ -49,7 +49,6 @@ int main() {
     if(opcion == 'Y' || opcion == 'y'){
         printf("Ingrese el tamaño del tablero, este va a determinar tamaño del mapa de juego(Max = 100): ");
     scanf("%d", &n);
-
     int arr[100][100]; 
 
     // Inicializar y dibujar el tablero
@@ -59,6 +58,15 @@ int main() {
    else if(opcion == 'N' || opcion == 'n'){
     printf("Bueno, andate a cagar");
     return 0;
+   }
+   
+   char movimiento;
+   for(int i = 0; i < n*2; i++){
+   printf("Ingrese hacia donde quieres moverte en el tablero(N-S-E-O)");
+    scanf("%s", &movimiento);
+    if(movimiento == 'N' || movimiento == 'n'){
+        
+    }
    }
     return 0;
 }
