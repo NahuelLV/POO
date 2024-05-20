@@ -55,15 +55,19 @@ void moverse(int arr[][100], int n, int pirataX, int pirataY, int tesoroX, int t
         arr[pirataX-1][pirataY] = 2;
     }
     
-    if(arr[pirataX][pirataY] == -2){
+    
+   }}
+    
+    void verificar(int arr[][100], int pirataX, int pirataY, int tesoroX, int tesoroY){
+        
+        if(arr[pirataX][pirataY] == -2){
         printf("El pirata cayo al agua, PERDISTE!");
     }
     
     if(arr[pirataX][pirataY] == arr[tesoroX][tesoroY]){
         printf("El pirata encontro el tesoro, GANASTE!");
     }
-   }
-    
+    }
     
 
 
