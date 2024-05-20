@@ -40,6 +40,32 @@ void dibujarTablero(int arr[][100], int n) {
 
 
 
+void moverse(int arr[][100], int n, int pirataX, int pirataY, int tesoroX, int tesoroY, char movimiento){
+  
+   for(int i = 0; i < n*2; i++){
+   printf("Ingrese hacia donde quieres moverte en el tablero(N-S-E-O):");
+    scanf("%s", &movimiento);
+    if(movimiento == 'N' || movimiento == 'n'){
+        arr[pirataX][pirataY+1] = 2;
+        inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
+        dibujarTablero(arr, n);
+    }else if(movimiento == 'S' || movimiento == 's'){
+        arr[pirataX][pirataY-1] = 2;
+        inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
+        dibujarTablero(arr, n);
+    }else if(movimiento == 'E' || movimiento == 'e'){
+        arr[pirataX+1][pirataY] = 2;
+        inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
+        dibujarTablero(arr, n);
+   }else if(movimiento == 'O' || movimiento == 'o'){
+        arr[pirataX-1][pirataY] = 2;
+        inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
+        dibujarTablero(arr, n);
+} 
+       
+   }}
+
+
 int main() {
     int n;
     char opcion;
@@ -65,12 +91,7 @@ int main() {
    }
    
    char movimiento;
-   for(int i = 0; i < n*2; i++){
-   printf("Ingrese hacia donde quieres moverte en el tablero(N-S-E-O)");
-    scanf("%s", &movimiento);
-    if(movimiento == 'N' || movimiento == 'n'){
-        
-    }
-   }
+   moverse(arr, n, pirataX, pirataY, tesoroX, tesoroY, movimiento);
+   
     return 0;
 }
