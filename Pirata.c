@@ -11,7 +11,7 @@ void inicializarTablero(int arr[][100], int n, int pirataX, int pirataY, int tes
         arr[n-1][0] = 3;        // Esquina inferior izquierda
         arr[n-n][n-1] = 3;      // Esquina superior derecha
     }
-    pirataX = rand() % (n-2)+1;
+   pirataX = rand() % (n-2)+1;
    pirataY = rand() % (n-2)+1;
     
    tesoroX = rand() % (n-2)+1;
@@ -47,23 +47,24 @@ void moverse(int arr[][100], int n, int pirataX, int pirataY, int tesoroX, int t
     scanf("%s", &movimiento);
     if(movimiento == 'N' || movimiento == 'n'){
         arr[pirataX][pirataY+1] = 2;
-        inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
-        dibujarTablero(arr, n);
     }else if(movimiento == 'S' || movimiento == 's'){
         arr[pirataX][pirataY-1] = 2;
-        inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
-        dibujarTablero(arr, n);
     }else if(movimiento == 'E' || movimiento == 'e'){
         arr[pirataX+1][pirataY] = 2;
-        inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
-        dibujarTablero(arr, n);
-   }else if(movimiento == 'O' || movimiento == 'o'){
+    }else if(movimiento == 'O' || movimiento == 'o'){
         arr[pirataX-1][pirataY] = 2;
-        inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
-        dibujarTablero(arr, n);
-} 
-       
-   }}
+    }
+    
+    if(arr[pirataX][pirataY] == -2){
+        printf("El pirata cayo al agua, PERDISTE!");
+    }
+    
+    if(arr[pirataX][pirataY] == arr[tesoroX][tesoroY]){
+        printf("El pirata encontro el tesoro, GANASTE!");
+    }
+   }
+    
+    
 
 
 int main() {
@@ -84,14 +85,14 @@ int main() {
     // Inicializar y dibujar el tablero
     inicializarTablero(arr, n, pirataX, pirataY,tesoroX, tesoroY);
     dibujarTablero(arr, n);
+    char movimiento;
+   moverse(arr, n, pirataX, pirataY, tesoroX, tesoroY, movimiento);
     }
    else if(opcion == 'N' || opcion == 'n'){
     printf("Bueno, que tenga un buen dia");
     return 0;
    }
    
-   char movimiento;
-   moverse(arr, n, pirataX, pirataY, tesoroX, tesoroY, movimiento);
    
     return 0;
 }
