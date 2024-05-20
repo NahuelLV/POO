@@ -11,11 +11,11 @@ void inicializarTablero(int arr[][100], int n, int pirataX, int pirataY, int tes
         arr[n-1][0] = 3;        // Esquina inferior izquierda
         arr[n-n][n-1] = 3;      // Esquina superior derecha
     }
-   pirataX = rand() % (n-2)+1;
-   pirataY = rand() % (n-2)+1;
+   pirataX = rand() % (n-2)+1;  //posicion aleatoria en X del pirata
+   pirataY = rand() % (n-2)+1;  //posicion aleatoria en Y del pirata
     
-   tesoroX = rand() % (n-2)+1;
-   tesoroY = rand() % (n-2)+1;
+   tesoroX = rand() % (n-2)+1;  //posicion aleatoria en X del tesoro
+   tesoroY = rand() % (n-2)+1;  //posicion aleatoria en Y del tesoro
     
     
     while(arr[pirataX][pirataY] == arr[tesoroX][tesoroY]){
@@ -23,8 +23,8 @@ void inicializarTablero(int arr[][100], int n, int pirataX, int pirataY, int tes
      tesoroY = rand() % (n-2)+1;
      break;
     }
-arr[pirataX][pirataY] = 2;
-arr[tesoroX][tesoroY] = 5;    
+arr[pirataX][pirataY] = 2;  //Posicion del pirata
+arr[tesoroX][tesoroY] = 5;  //Psicion del tesoro
 }
 
 
