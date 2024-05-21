@@ -2,47 +2,58 @@
 #include <stdlib.h>
 #include <time.h>
 
-void generarrandoms(int n, int arr[][n], int *pirataX, int *pirataY, int *tesoroX, int *tesoroY) { 
+
+/*void limpiarPantalla() {
+#if defined( _WIN32) || defined(_WIN64)
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+*/
+
+
+void generarrandoms(int n, char tablero[][n], int *pirataX, int *pirataY, int *tesoroX, int *tesoroY) {
     *pirataX = rand() % (n - 2) + 1;  // posición aleatoria en X del pirata
     *pirataY = rand() % (n - 2) + 1;  // posición aleatoria en Y del pirata
-    
+
     *tesoroX = rand() % (n - 2) + 1;  // posición aleatoria en X del tesoro
     *tesoroY = rand() % (n - 2) + 1;  // posición aleatoria en Y del tesoro
-    
+
     while (*pirataX == *tesoroX && *pirataY == *tesoroY) {
         *tesoroX = rand() % (n - 2) + 1;
         *tesoroY = rand() % (n - 2) + 1;
     }
 
-    arr[*pirataX][*pirataY] = 2;  // Posición del pirata
-    arr[*tesoroX][*tesoroY] = 5;  // Posición del tesoro
+    tablero[*pirataX][*pirataY] = 'P';  // Posición del pirata
+    tablero[*tesoroX][*tesoroY] = 'T';  // Posición del tesoro
 }
 
-void inicializarTablero(int n, int arr[][n]) {
+void inicializarTablero(int n, char tablero[][n]) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             if (i == 0 || i == n - 1 || j == 0 || j == n - 1) {
-                arr[i][j] = -1; // Borde del tablero
+                tablero[i][j] = 'A'; // Borde del tablero
             } else {
-                arr[i][j] = 0;  // Interior del tablero
+                tablero[i][j] = '*';  // Interior del tablero
             }
         }
     }
-    arr[n - 1][0] = 3;    // Esquina inferior izquierda
-    arr[0][n - 1] = 3;    // Esquina superior derecha
+    tablero[n - 1][0] = 'E';    // Esquina inferior izquierda
+    tablero[0][n - 1] = 'E';    // Esquina superior derecha
 }
 
-void imprimirTablero(int n, int arr[][n]) {
+void imprimirTablero(int n, char tablero[][n]) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("%3d", arr[i][j]);
+            printf("%2c", tablero[i][j]);
         }
         printf("\n");
     }
 }
 
-int verificar(int n, int arr[][n], int pirataX, int pirataY, int tesoroX, int tesoroY) {
-    if (arr[pirataX][pirataY] == -1) {
+int verificar(int n, char tablero[][n], int pirataX, int pirataY, int tesoroX, int tesoroY) {
+    if (tablero[pirataX][pirataY] == 'A') {
         printf("El pirata cayó al agua, ¡PERDISTE!\n");
         return 0;
     }
@@ -51,9 +62,10 @@ int verificar(int n, int arr[][n], int pirataX, int pirataY, int tesoroX, int te
         printf("El pirata encontró el tesoro, ¡GANASTE!\n");
         return 0;
     }
+    return 1; // Continuar el juego
 }
 
-void moverse(int n, int arr[][n], int *pirataX, int *pirataY, int tesoroX, int tesoroY) {
+void moverse(int n, char tablero[][n], int *pirataX, int *pirataY, int tesoroX, int tesoroY) {
     char movimiento;
     int cantidad = (n * 2) + 1;
     for (int i = 0; i < n * 2; i++) {
@@ -62,7 +74,7 @@ void moverse(int n, int arr[][n], int *pirataX, int *pirataY, int tesoroX, int t
         printf("Ingrese hacia donde quieres moverte en el tablero (N-S-E-O): ");
         scanf(" %c", &movimiento);
         
-        arr[*pirataX][*pirataY] = 0;  // Limpia la posición actual del pirata
+        tablero[*pirataX][*pirataY] = '-';  // Limpia la posición actual del pirata
 
         if (movimiento == 'N' || movimiento == 'n') {
             *pirataX -= 1;  // Norte - se mueve hacia arriba
@@ -78,15 +90,19 @@ void moverse(int n, int arr[][n], int *pirataX, int *pirataY, int tesoroX, int t
         }
 
         // Verificar la nueva posición antes de establecerla
-        if (arr[*pirataX][*pirataY] == -1) {
+        if (tablero[*pirataX][*pirataY] == 'A') {
             printf("El pirata cayó al agua, ¡PERDISTE!\n");
             return;
         }
 
-        arr[*pirataX][*pirataY] = 2;  // Nueva posición del pirata
-        imprimirTablero(n, arr);
-        verificar(n, arr, *pirataX, *pirataY, tesoroX, tesoroY);
+        tablero[*pirataX][*pirataY] = 'P';  // Nueva posición del pirata
+        //limpiarPantalla();
+        imprimirTablero(n, tablero);
+        if (verificar(n, tablero, *pirataX, *pirataY, tesoroX, tesoroY) == 0) {
+            return; // Terminar el juego si se cumple alguna condición
+        }
     }
+    printf("Se agotaron los movimientos, ¡PERDISTE!\n");
 }
 
 int main() {
@@ -95,18 +111,19 @@ int main() {
     int pirataX, pirataY, tesoroX, tesoroY;
 
     srand(time(NULL));  
-    printf("¡Hola, bienvenido al juego del pirata! Tu objetivo es encontrar el tesoro, ¿quieres empezar? (y/n): ");
+    printf("¡Hola, bienvenido al juego del pirata!\n Tu objetivo es encontrar el tesoro, ¿quieres empezar? (y/n): ");
     scanf(" %c", &opcion);
 
     if (opcion == 'Y' || opcion == 'y') {
+        printf("MAPA:\n * = terreno desconocido\n A = agua(Si caes en el moriras)\n E = los puentes de las esquinas\n P = pirata(el jugador)\n T = tesoro(tu objetivo es encontrarlo)\n - = camino que ya recorriste\n");
         printf("Ingrese el tamaño del tablero (Máximo = 100): ");
         scanf("%d", &n);
 
-        int arr[n][n]; 
-        inicializarTablero(n, arr);
-        generarrandoms(n, arr, &pirataX, &pirataY, &tesoroX, &tesoroY);
-        imprimirTablero(n, arr);  // Imprimir el tablero después de colocar el pirata y el tesoro
-        moverse(n, arr, &pirataX, &pirataY, tesoroX, tesoroY);
+        char tablero[n][n]; 
+        inicializarTablero(n, tablero);
+        generarrandoms(n, tablero, &pirataX, &pirataY, &tesoroX, &tesoroY);
+        imprimirTablero(n, tablero);  // Imprimir el tablero después de colocar el pirata y el tesoro
+        moverse(n, tablero, &pirataX, &pirataY, tesoroX, tesoroY);
     } else if (opcion == 'N' || opcion == 'n') {
         printf("Bueno, que tenga un buen día.\n");
     }
