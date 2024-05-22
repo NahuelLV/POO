@@ -4,20 +4,21 @@
 
 #define NEGRO_T        "\x1b[30m"
 #define NEGRO_F        "\x1b[40m"
-#define ROJO_T     "\x1b[31m"
-#define ROJO_F     "\x1b[41m"
+#define ROJO_T         "\x1b[31m"
+#define ROJO_F         "\x1b[41m"
 #define VERDE_T        "\x1b[32m"
 #define VERDE_F        "\x1b[42m"
-#define AMARILLO_T "\x1b[33m"
-#define AMARILLO_F  "\x1b[43m"
-#define AZUL_T     "\x1b[34m"
-#define AZUL_F      "\x1b[44m"
-#define MAGENTA_T  "\x1b[35m"
-#define MAGENTA_F  "\x1b[45m"
-#define CYAN_T     "\x1b[36m"
-#define CYAN_F     "\x1b[46m"
-#define BLANCO_T   "\x1b[37m"
-#define BLANCO_F   "\x1b[47m"
+#define AMARILLO_T     "\x1b[33m"
+#define AMARILLO_F     "\x1b[43m"
+#define AZUL_T         "\x1b[34m"
+#define AZUL_F         "\x1b[44m"
+#define MAGENTA_T      "\x1b[35m"
+#define MAGENTA_F      "\x1b[45m"
+#define CYAN_T         "\x1b[36m"
+#define CYAN_F         "\x1b[46m"
+#define BLANCO_T       "\x1b[37m"
+#define BLANCO_F       "\x1b[47m"
+#define RESET_COLOR    "\x1b[0m"
 
 void limpiarPantalla() {
 #if defined( _WIN32) || defined(_WIN64)
@@ -63,7 +64,22 @@ void inicializarTablero(int n, char tablero[][n]) {
 void imprimirTablero(int n, char tablero[][n]) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf(" %2c ", tablero[i][j]);
+            switch (tablero[i][j]) {
+                case 'A':
+                    printf(AZUL_F " %2c " RESET_COLOR, tablero[i][j]);
+                    break;
+                case 'T':
+                    printf(AMARILLO_F " %2c " RESET_COLOR, tablero[i][j]);
+                    break;
+                case 'E':
+                    printf(NEGRO_F " %2c " RESET_COLOR, tablero[i][j]);
+                    break;
+                case 'P':
+                    printf(MAGENTA_F " %2c " RESET_COLOR, tablero[i][j]);
+                    break;
+                default:
+                    printf(" %2c ", tablero[i][j]);
+            }
         }
         printf("\n");
     }
@@ -72,12 +88,12 @@ void imprimirTablero(int n, char tablero[][n]) {
 //Funcion la cual verifica si ganaste o perdiste
 int verificar(int n, char tablero[][n], int pirataX, int pirataY, int tesoroX, int tesoroY) {
     if (tablero[pirataX][pirataY] == 'A') {
-        printf("El pirata cayó al agua, ¡PERDISTE!\n"); //Verifica si perdiste
+        printf(ROJO_T "El pirata cayó al agua, ¡PERDISTE!\n" RESET_COLOR); //Verifica si perdiste
         return 0;
     }
     
     if (pirataX == tesoroX && pirataY == tesoroY) {
-        printf("El pirata encontró el tesoro, ¡GANASTE!\n"); //Verifica si ganaste
+        printf(AMARILLO_T "El pirata encontró el tesoro, ¡GANASTE!\n" RESET_COLOR); //Verifica si ganaste
         return 0;
     }
     return 1; // Continuar el juego
@@ -118,7 +134,7 @@ void moverse(int n, char tablero[][n], int *pirataX, int *pirataY, int tesoroX, 
 
         // Verificar la nueva posición antes de establecerla
         if (tablero[*pirataX][*pirataY] == 'A') {
-            printf("El pirata cayó al agua, ¡PERDISTE!\n");
+            printf(ROJO_T "El pirata cayó al agua, ¡PERDISTE!\n" RESET_COLOR);
             return;
         }
 
@@ -128,9 +144,11 @@ void moverse(int n, char tablero[][n], int *pirataX, int *pirataY, int tesoroX, 
         if (verificar(n, tablero, *pirataX, *pirataY, tesoroX, tesoroY) == 0) {
             return; // Terminar el juego si se cumple alguna condición
         }
-    }
-    printf("Se agotaron los movimientos, ¡PERDISTE!\n");
-}
+        if(cantidad == 0){
+        printf(ROJO_T "Se agotaron los movimientos, ¡PERDISTE!\n" RESET_COLOR);
+        return;
+        }
+    }}
 
 int main() {
     int n;               //Declaramos variables necesarias
@@ -143,7 +161,7 @@ int main() {
 
     if (opcion == 'S' || opcion == 's') {
         printf("MAPA:\n * = terreno desconocido\n A = agua(Si caes en el moriras)\n E = los puentes de las esquinas\n P = pirata(el jugador)\n T = tesoro(tu objetivo es encontrarlo)\n - = camino que ya recorriste\n");
-        printf("Ingrese el tamaño del tablero (Máximo = 20 y minimo 4): ");
+        printf("Ingrese el tamaño del tablero (Máximo = 20 y minimo = 4): ");
         scanf("%d", &n);
 
         char tablero[n][n]; 
