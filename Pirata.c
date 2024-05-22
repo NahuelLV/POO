@@ -2,6 +2,30 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define NEGRO_T        "\x1b[30m"
+#define NEGRO_F        "\x1b[40m"
+#define ROJO_T     "\x1b[31m"
+#define ROJO_F     "\x1b[41m"
+#define VERDE_T        "\x1b[32m"
+#define VERDE_F        "\x1b[42m"
+#define AMARILLO_T "\x1b[33m"
+#define AMARILLO_F  "\x1b[43m"
+#define AZUL_T     "\x1b[34m"
+#define AZUL_F      "\x1b[44m"
+#define MAGENTA_T  "\x1b[35m"
+#define MAGENTA_F  "\x1b[45m"
+#define CYAN_T     "\x1b[36m"
+#define CYAN_F     "\x1b[46m"
+#define BLANCO_T   "\x1b[37m"
+#define BLANCO_F   "\x1b[47m"
+
+void limpiarPantalla() {
+#if defined( _WIN32) || defined(_WIN64)
+    system("cls");
+#else
+    system("clear");
+#endif
+}
 
 //Funcion en la cual damos posicion al pirata y el tesoro
 void generarrandoms(int n, char tablero[][n], int *pirataX, int *pirataY, int *tesoroX, int *tesoroY) {
@@ -63,7 +87,14 @@ int verificar(int n, char tablero[][n], int pirataX, int pirataY, int tesoroX, i
 //Funcion que permite el movimiento del pirata
 void moverse(int n, char tablero[][n], int *pirataX, int *pirataY, int tesoroX, int tesoroY) {
     char movimiento;
-    int cantidad = (n * 2) + 1;
+    int cantidad;
+    if(n < 10){
+        cantidad = n * 1.5; 
+    }else if(n >= 10 && n < 15){
+        cantidad = (n * 4) + 1;
+    }else if(n >= 15){
+        cantidad = (n * 5) + 1;
+    }
     for (int i = 0; i < n * 2; i++) {
         cantidad -= 1;
         printf("Sus movimientos totales son: %d\n", cantidad);
@@ -71,7 +102,7 @@ void moverse(int n, char tablero[][n], int *pirataX, int *pirataY, int tesoroX, 
         scanf(" %c", &movimiento);
         
         tablero[*pirataX][*pirataY] = '-';  // Limpia la posición actual del pirata
-
+        limpiarPantalla();
         if (movimiento == 'N' || movimiento == 'n') {
             *pirataX -= 1;  // Norte - se mueve hacia arriba
         } else if (movimiento == 'S' || movimiento == 's') {
@@ -107,12 +138,12 @@ int main() {
     int pirataX, pirataY, tesoroX, tesoroY;
 
     srand(time(NULL));  
-    printf("¡Hola, bienvenido al juego del pirata!\n Tu objetivo es encontrar el tesoro, ¿quieres empezar? (y/n): ");
+    printf("¡Hola, bienvenido al juego del pirata!\n Tu objetivo es encontrar el tesoro, ¿quieres empezar? (s/n): ");
     scanf(" %c", &opcion);
 
-    if (opcion == 'Y' || opcion == 'y') {
+    if (opcion == 'S' || opcion == 's') {
         printf("MAPA:\n * = terreno desconocido\n A = agua(Si caes en el moriras)\n E = los puentes de las esquinas\n P = pirata(el jugador)\n T = tesoro(tu objetivo es encontrarlo)\n - = camino que ya recorriste\n");
-        printf("Ingrese el tamaño del tablero (Máximo = 100): ");
+        printf("Ingrese el tamaño del tablero (Máximo = 20 y minimo 4): ");
         scanf("%d", &n);
 
         char tablero[n][n]; 
