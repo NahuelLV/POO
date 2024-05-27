@@ -167,7 +167,10 @@ int main() {
     if (opcion == 'S' || opcion == 's') {
         printf("Ingrese el tamaño del tablero (Máximo = 20 y minimo = 4): ");
         scanf("%d", &n);
-
+         if(n < 4 || n > 20){
+            printf("Tamaño no valido, reinicie el programa\n");
+            return 0;
+        }
         char tablero[n][n]; 
         inicializarTablero(n, tablero);
         generarrandoms(n, tablero, &pirataX, &pirataY, &tesoroX, &tesoroY);
@@ -176,6 +179,11 @@ int main() {
     } else if (opcion == 'N' || opcion == 'n') {
         printf("Bueno, que tenga un buen día.\n");
     }
+      else{
+          printf("Reinicie el programa e ingrese el valor indicado");
+          return 0;
+          
+      }
 
     return 0;
 }
