@@ -42,7 +42,7 @@ void generarrandoms(int n, char tablero[][n], int *pirataX, int *pirataY, int *t
     }
 
     tablero[*pirataX][*pirataY] = 'P';  // Posición del pirata
-    tablero[*tesoroX][*tesoroY] = 'T';  // Posición del tesoro
+    tablero[*tesoroX][*tesoroY] = '*';  // Posición del tesoro
 }
 
 //Funcion en la que damos posicion al agua y los puentes
@@ -76,6 +76,9 @@ void imprimirTablero(int n, char tablero[][n]) {
                     break;
                 case 'P':
                     printf(MAGENTA_F " %2c " RESET_COLOR, tablero[i][j]);
+                    break;
+                    case '-':
+                    printf(VERDE_F " %2c " RESET_COLOR, tablero[i][j]);
                     break;
                 default:
                     printf(" %2c ", tablero[i][j]);
@@ -113,6 +116,7 @@ void moverse(int n, char tablero[][n], int *pirataX, int *pirataY, int tesoroX, 
     }
     for (int i = 0; i < n * 2; i++) {
         cantidad -= 1;
+        printf("\nMAPA:\n * = terreno desconocido\n A = agua(Si caes en el moriras)\n E = los puentes de las esquinas\n P = pirata(el jugador)\n T = tesoro(tu objetivo es encontrarlo)\n - = camino que ya recorriste\n");
         printf("Sus movimientos totales son: %d\n", cantidad);
         printf("Ingrese hacia donde quieres moverte en el tablero (N-S-E-O): ");
         scanf(" %c", &movimiento);
@@ -129,6 +133,7 @@ void moverse(int n, char tablero[][n], int *pirataX, int *pirataY, int tesoroX, 
             *pirataY -= 1;  // Oeste - se mueve hacia la izquierda
         } else {
             printf("Movimiento no válido. Intente de nuevo.\n");
+            cantidad += 1;
             continue;
         }
 
@@ -160,7 +165,6 @@ int main() {
     scanf(" %c", &opcion);
 
     if (opcion == 'S' || opcion == 's') {
-        printf("MAPA:\n * = terreno desconocido\n A = agua(Si caes en el moriras)\n E = los puentes de las esquinas\n P = pirata(el jugador)\n T = tesoro(tu objetivo es encontrarlo)\n - = camino que ya recorriste\n");
         printf("Ingrese el tamaño del tablero (Máximo = 20 y minimo = 4): ");
         scanf("%d", &n);
 
