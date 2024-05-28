@@ -3,15 +3,24 @@
 #include <time.h>
 
 
+void limpiarPantalla() {
+#if defined( _WIN32) || defined(_WIN64)
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+
 void inicializarTablero(char tablero[3][3]) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-                tablero[i][j] = '-'; 
+            tablero[i][j] = '-'; 
         }
     }
 }
 
-//Funcion que imprime el tablero
+// Función que imprime el tablero
 void imprimirTablero(char tablero[3][3]) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -21,30 +30,55 @@ void imprimirTablero(char tablero[3][3]) {
     }
 }
 
-void jugada(char tablero[3][3], int f, int c){
-    int jugador;
-    for(int i; i < 3; i++){ 
-        printf("Ingrese donde quiere poner su figura(El primer numero es el de la fila y el segundo el de la columna:\n");
-            scanf("%d", &f);
-            scanf("%d", &c);
-            printf(" %2c ", tablero[f][c]);
+int jugada(char tablero[3][3]) {
+    int f, c;
+    char jugador_actual = 'X'; // Variable para alternar turnos entre jugadores
+    for(int cant = 0; cant < 9; cant ++) {
+        printf("Turno del jugador %c. Ingrese donde quiere poner su figura (fila y columna, separadas por un espacio): ", jugador_actual);
+        scanf("%d %d", &f, &c);
+        if (f < 0 || f >= 3 || c < 0 || c >= 3) {
+            printf("Posición fuera del rango válido. Intente nuevamente.\n");
+            continue; // Permite al jugador repetir su jugada
+        }
 
+        // Verificar si la posición está ocupada
+        if (tablero[f][c] != '-') {
+            printf("La posición seleccionada ya está ocupada. Intente nuevamente.\n");
+            continue; // Permite al jugador repetir su jugada
+        }
+
+        // Realizar la jugada para el jugador actual
+        tablero[f][c] = jugador_actual;
+        // Imprimir el tablero actualizado
+        imprimirTablero(tablero);
+
+        // Cambiar al siguiente jugador
+        jugador_actual = (jugador_actual == 'X') ? 'O' : 'X';
+        if(tablero[0][0] == 'X' && tablero[0][1] == 'X' && tablero[0][2] == 'X' || tablero[1][0] == 'X' && tablero[1][1] == 'X' && tablero[1][2] == 'X' || tablero[2][0] == 'X' && tablero[2][1] == 'X' && tablero[2][2] == 'X' || tablero[0][0] == 'X' && tablero[1][1] == 'X' && tablero[2][2] == 'X'){
+            printf("El ganador del juego es el jugador 1, FELICIDADES!");
+            return 0;
+        }else if(tablero[0][0] == 'O' && tablero[0][1] == 'O' && tablero[0][2] == 'O' || tablero[1][0] == 'O' && tablero[1][1] == 'O' && tablero[1][2] == 'O' || tablero[2][0] == 'O' && tablero[2][1] == 'O' && tablero[2][2] == 'O' || tablero[0][0] == 'O' && tablero[1][1] == 'O' && tablero[2][2] == 'O'){
+            printf("El ganador del juego es el jugador 1, FELICIDADES!");
+            return 0;
+        }
+    }
 }
-}
+
+
+
+
 
 int main() {
-    int n, f, c;               //Declaramos variables necesarias
     char opcion;
-   
     srand(time(NULL));  
-    printf("¡Hola, bienvenido al TA-TE-TI!\n¿Quieres empezar? (y/n): ");
+    printf("¡Hola, bienvenido al TA-TE-TI!\n¿Quieres empezar? (s/n): ");
     scanf(" %c", &opcion);
-    if (opcion == 'Y' || opcion == 'y') {
-        printf("REGLAS:\n Tienes que juntar tres de tus formas(O-X) en forma diagonal,vertical o horizontal\n");
+    if (opcion == 'S' || opcion == 's') {
+        printf("REGLAS:\n Tienes que juntar tres de tus formas(O-X) en forma diagonal, vertical u horizontal\n");
         char tablero[3][3]; 
         inicializarTablero(tablero);
         imprimirTablero(tablero);
-        jugada(tablero, f, c);
+        jugada(tablero);
     } else if (opcion == 'N' || opcion == 'n') {
         printf("Bueno, que tenga un buen día.\n");
     }
