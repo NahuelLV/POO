@@ -1,53 +1,72 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 void limpiarPantalla() {
-#if defined( _WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64)
     system("cls");
 #else
     system("clear");
 #endif
 }
 
-
-int crearTablero(char dificultad,  int Tablero[][0]) {
+char crearTablero(char *dificultad) {
     printf("F)Facil\nM)Media\nD)Dificil\nElija la dificultad: ");
-    scanf("%s", &dificultad);
-     //seleccion de dificultades, F facil, M media, D dificil
-    
-        //FACIL: 20X20, MEDIA 12X12, DIFICL 8X8;
+    scanf(" %c", dificultad);  // Note the space before %c to consume any leading whitespace
+    printf("\n");
+    return *dificultad;
+}
+
+void inicializarTablero(char dificultad, char Tablero[][20]) {
+    int size = 0;
+
     if (dificultad == 'F' || dificultad == 'f') {
-            for (int i = 0; i < 20; i++){
-        for(int j=0;j < 20; j++){
-            Tablero[i][j]=1;
-            printf(" %d ", Tablero[i][j]);
+        size = 20;
+    } else if (dificultad == 'M' || dificultad == 'm') {
+        size = 12;
+    } else if (dificultad == 'D' || dificultad == 'd') {
+        size = 8;
+    } else {
+        printf("Elija un valor valido\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (i == 0 || i == size - 1 || j == 0 || j == size - 1) {
+                Tablero[i][j] = '|'; // Borde del tablero
+            } else {
+                Tablero[i][j] = '*';
+            }
+        }
+    }
+}
+
+void imprimirTablero(char dificultad, char Tablero[][20]) {
+    int size = 0;
+
+    if (dificultad == 'F' || dificultad == 'f') {
+        size = 20;
+    } else if (dificultad == 'M' || dificultad == 'm') {
+        size = 12;
+    } else if (dificultad == 'D' || dificultad == 'd') {
+        size = 8;
+    }
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf(" %2c ", Tablero[i][j]);
         }
         printf("\n");
-   }
-        }
-     if (dificultad == 'M' || dificultad == 'm') {
-            for (int i = 0; i < 12; i++){
-        for(int j=0;j < 12; j++){
-            Tablero[i][j]=1;
-        }
-   }
-        }
-         if (dificultad == 'D' || dificultad == 'd') {
-            for (int i = 0; i < 8; i++){
-        for(int j=0;j < 8; j++){
-            Tablero[i][j]=1;
-        }
-   }
-        } else {
-        printf("Elija un valor valido");
-        return 0;
-     }
-
+    }
 }
 
 int main() {
-    int Tablero[0][0];
     char dificultad;
-    crearTablero(dificultad, Tablero);
+    char Tablero[20][20];  // Maximum size board
+
+    crearTablero(&dificultad);
+    inicializarTablero(dificultad, Tablero);
+    imprimirTablero(dificultad, Tablero);
+
+    return 0;
 }
